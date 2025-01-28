@@ -8,13 +8,6 @@ export default async function apiRequest(
 
     const token = localStorage.getItem("token");
 
-    // const config = {
-    //     method,
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //         ...headers,
-    //     },
-    // };
     const config = {
         method,
         headers: {
@@ -23,24 +16,29 @@ export default async function apiRequest(
             ...headers,
         },
     };
-
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    console.log("config", config);
     // Only add body for POST/PUT methods
     if (body && (method === "POST" || method === "PUT")) {
         config.body = JSON.stringify(body);
+        console.log("is it here?");
     }
 
     try {
-        console.log("api url", `${API_BASE_URL}${endpoint}`);
-        console.log("api config", config);
         const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
+        console.log("Response for API Logout", response);
 
         // Check if response is ok (status code 200-299)
         if (!response.ok) {
-            const data = await response.json();
-            throw new Error(data.message || "Something went wrong");
+            const errorText = await response.text(); // Get raw response
+            console.error("Server Error Response:", errorText);
+            throw new Error(errorText || "Something went wrong");
         }
 
         const data = await response.json();
+        console.log("After response data is", data);
         return { success: true, data };
     } catch (error) {
         return {

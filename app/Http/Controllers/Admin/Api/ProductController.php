@@ -19,7 +19,7 @@ class ProductController extends Controller
     {
         try {
             $products = Cache::remember('products', 60, function () {
-                return Product::all();
+                return Product::orderBy('id', 'DESC')->get();
             });
 
             // Return a successful response

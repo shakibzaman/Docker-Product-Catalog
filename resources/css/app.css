@@ -66,3 +66,10 @@
         @apply w-8 h-8 rounded-full overflow-hidden object-center object-cover;
     }
 }
+
+.primary-btn {
+    background-color: rgb(8, 187, 127);
+    padding: 4px;
+    border-radius: 5%;
+    color: #fff;
+}

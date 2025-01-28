@@ -27,17 +27,20 @@ export default function Login() {
     const { login } = useAuth(); // Get login function from context
     const navigate = useNavigate();
 
+    // ✅ FIX: Check if user is already logged in based on token
     useEffect(() => {
-        if (login) {
-            navigate("/home", { replace: true }); // Redirect to home if logged in
+        const token = localStorage.getItem("token");
+        if (token) {
+            navigate("/home", { replace: true });
         }
-    }, [login, navigate]);
+    }, [navigate]);
 
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
+
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState(null);
 
@@ -49,9 +52,10 @@ export default function Login() {
             const response = await apiRequest("/login", "POST", data);
             console.log("response", response);
 
-            if (response.data.status === 200 && response.data.token) {
+            if (response.success && response.data.token) {
                 setMessage({ type: "success", text: response.data.message });
                 login(response.data.token); // Store token and redirect
+                navigate("/home"); // Redirect after successful login
             } else {
                 setMessage({
                     type: "error",
@@ -72,7 +76,7 @@ export default function Login() {
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
-            <div className="bg-white p-10 rounded-2xl shadow-xl w-full max-w-md">
+            <div className="bg-white p-6 rounded-2xl shadow-xl w-1/2 mx-auto">
                 <h2 className="text-3xl font-bold mb-6 text-center text-gray-700">
                     Login
                 </h2>
@@ -128,7 +132,7 @@ export default function Login() {
 
                     <button
                         type="submit"
-                        className="w-full bg-blue-600 text-white py-3 rounded-lg text-lg font-medium hover:bg-blue-700 transition-all duration-300"
+                        className="primary-btn mt-2 bg-blue-600 text-white py-3 rounded-lg text-lg font-medium hover:bg-blue-700 transition-all duration-300"
                         disabled={loading}
                     >
                         {loading ? "Logging in..." : "Login"}

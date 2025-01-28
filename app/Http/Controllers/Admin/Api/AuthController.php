@@ -84,11 +84,13 @@ class AuthController extends Controller
     {
         try {
             $request->user()->tokens()->delete();
-            return response()->json(['message' => 'Logged out successfully']);
+            return response()->json([
+                'message' => 'Logged out successfully',
+            ], 201);
         } catch (Exception $e) {
             return response()->json([
                 'errors' => $e->getMessage(),
-                'message' => 'Validation failed',
+                'message' => 'Logout failed',
             ], 422);
         }
     }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import apiRequest from "./../utils/apiRequest";
 
 export default function List() {
@@ -39,6 +40,9 @@ export default function List() {
                         {message}
                     </div>
                 )}
+                <Link className="button primary-btn" to="/register">
+                    Add User
+                </Link>
                 <h3 className="text-center w-full">User List</h3>
                 <table className="table-auto border-collapse border border-gray-300 text-center w-full">
                     <thead>

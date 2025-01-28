@@ -34,10 +34,7 @@ export default function List() {
                         {message}
                     </div>
                 )}
-                <Link
-                    className="inline-block px-6 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    to="create-product"
-                >
+                <Link className="button primary-btn" to="/create-product">
                     Add Product
                 </Link>
                 <h3 className="text-center w-full">Products List</h3>
@@ -48,6 +45,10 @@ export default function List() {
                             <th className="px-4 py-2">Name</th>
                             <th className="px-4 py-2">Description</th>
                             <th className="px-4 py-2">Price</th>
+                            <th className="px-4 py-2">Stock Quantity</th>
+                            <th className="px-4 py-2">
+                                Min Stock Qunatity for Notify
+                            </th>
                             <th className="px-4 py-2">Action</th>
                         </tr>
                     </thead>
@@ -66,8 +67,17 @@ export default function List() {
                                 <td className="border px-4 py-2">
                                     {product.price}
                                 </td>
+                                <td className="border px-4 py-2">
+                                    {product.stock_quantity}
+                                </td>
+                                <td className="border px-4 py-2">
+                                    {product.min_notification_stock}
+                                </td>
                                 <td>
-                                    <Link to={`/edit-product/${product.id}`}>
+                                    <Link
+                                        className="primary-btn"
+                                        to={`/edit-product/${product.id}`}
+                                    >
                                         Edit
                                     </Link>
                                 </td>

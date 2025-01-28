@@ -34,9 +34,12 @@ export default function Register() {
                 login(response.data.token.plainTextToken);
                 navigate("/home");
             } else {
+                console.log("response is", response);
                 setMessage({ type: "error", text: response.data.message });
             }
         } catch (error) {
+            console.log("Catch error response is", error);
+
             setMessage({
                 type: "error",
                 text: "Registration failed. Try again.",
@@ -47,10 +50,10 @@ export default function Register() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
-            <div className="bg-white p-8 rounded-lg shadow-md w-96">
+        <div className="max-w-lg mx-auto p-4 mt-8">
+            <div className="bg-white shadow rounded-lg p-6">
                 <h2 className="text-2xl font-bold text-center mb-6">
-                    Register
+                    Add New User
                 </h2>
 
                 {message && (
@@ -108,7 +111,7 @@ export default function Register() {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 disabled:bg-gray-400"
+                        className="primary-btn mt-2 bg-blue-500 text-white p-2 rounded hover:bg-blue-600 disabled:bg-gray-400"
                     >
                         {loading ? "Registering..." : "Create New"}
                     </button>

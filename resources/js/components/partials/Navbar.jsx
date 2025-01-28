@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../auth/AuthContext"; // Import Auth Context
 
 export default function Navbar() {
+    const { logout } = useAuth(); // ✅ Use logout function from context
+
     return (
         <nav style={styles.navbar}>
             <h2 style={styles.logo}>MyApp</h2>
             <ul style={styles.navLinks}>
-                <li>
-                    <Link to="/">Home</Link>
-                </li>
                 <li>
                     <Link to="/home">Home</Link>
                 </li>
@@ -20,6 +20,11 @@ export default function Navbar() {
                 </li>
                 <li>
                     <Link to="/product-list">Product List</Link>
+                </li>
+                <li>
+                    <button onClick={logout} style={styles.logoutButton}>
+                        Logout
+                    </button>
                 </li>
             </ul>
         </nav>
