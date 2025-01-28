@@ -73,3 +73,9 @@
     border-radius: 5%;
     color: #fff;
 }
+.danger-btn {
+    background-color: rgb(231, 8, 8);
+    padding: 4px;
+    border-radius: 5%;
+    color: #fff;
+}

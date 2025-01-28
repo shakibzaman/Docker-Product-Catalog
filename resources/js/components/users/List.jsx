@@ -14,11 +14,10 @@ export default function List() {
 
             try {
                 const response = await apiRequest("/users", "GET");
-                console.log("User response is", response.data.users);
                 if (response.success) {
-                    setUsers(response.data.users); // Set users in state
+                    setUsers(response.data.users); 
                 } else {
-                    setMessage(response.message); // Handle error message
+                    setMessage(response.message); 
                 }
             } catch (error) {
                 setMessage(error.message || "Something went wrong");

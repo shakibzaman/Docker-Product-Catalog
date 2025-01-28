@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "./AuthContext"; // Import authentication context
+import { useAuth } from "./AuthContext"; 
 
 export default function RedirectIfAuthenticated({ children }) {
     const { user } = useAuth(); // Get auth state
@@ -12,5 +12,5 @@ export default function RedirectIfAuthenticated({ children }) {
         }
     }, [user, navigate]);
 
-    return children; // Render the component normally if user is NOT logged in
+    return children; 
 }

@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "./AuthContext"; // Import AuthContext
+import { useAuth } from "./AuthContext"; 
 
 const API_BASE_URL = "http://localhost:8283/api"; // API Base URL
 
@@ -24,10 +24,10 @@ const apiRequest = async (endpoint, method = "GET", data = null) => {
 };
 
 export default function Login() {
-    const { login } = useAuth(); // Get login function from context
+    const { login } = useAuth(); 
     const navigate = useNavigate();
 
-    // ✅ FIX: Check if user is already logged in based on token
+    // Check if user is already logged in based on token
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (token) {
@@ -50,7 +50,6 @@ export default function Login() {
 
         try {
             const response = await apiRequest("/login", "POST", data);
-            console.log("response", response);
 
             if (response.success && response.data.token) {
                 setMessage({ type: "success", text: response.data.message });

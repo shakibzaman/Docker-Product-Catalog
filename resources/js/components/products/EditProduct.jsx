@@ -14,8 +14,6 @@ export default function EditProduct() {
         stock_quantity: "",
         min_notification_stock: "",
     });
-    console.log("Is", id);
-
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -27,7 +25,6 @@ export default function EditProduct() {
                 setMessage(null);
 
                 const response = await apiRequest("/products/" + id, "GET");
-                console.log("Product Response", response.data.data);
                 setFormData(response.data.data);
             } catch (error) {
                 setMessage(error.message || "Error faching products");
@@ -49,7 +46,6 @@ export default function EditProduct() {
                 "PUT",
                 formData
             );
-            console.log("Update response", response);
             if (response.data.status === 200) {
                 setMessage({
                     type: "success",

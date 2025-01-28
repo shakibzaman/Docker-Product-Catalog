@@ -34,12 +34,9 @@ export default function Register() {
                 login(response.data.token.plainTextToken);
                 navigate("/home");
             } else {
-                console.log("response is", response);
                 setMessage({ type: "error", text: response.data.message });
             }
         } catch (error) {
-            console.log("Catch error response is", error);
-
             setMessage({
                 type: "error",
                 text: "Registration failed. Try again.",
